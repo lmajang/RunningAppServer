@@ -1,3 +1,17 @@
 spring:
   application:
     name: runningAppServer
+  datasource:
+    url: jdbc:mysql://sh-cynosdbmysql-grp-jrv5mipe.sql.tencentcdb.com:26396/runningAppDB
+    username: root
+    password: Qq123456789
+    driver-class-name:  com.mysql.cj.jdbc.Driver
+# 开发环境配置
+server:
+  port: 8080         # 服务器的HTTP端口
+  address: 172.22.81.151    # 允许局域网访问
+  servlet:
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
