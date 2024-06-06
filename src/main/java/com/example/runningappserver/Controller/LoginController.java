@@ -1,5 +1,6 @@
 package com.example.runningappserver.controller;
 
+import com.alibaba.fastjson2.JSONObject;
 import com.example.runningappserver.Pojo.UserPojo;
 import com.example.runningappserver.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,8 +20,8 @@ public class LoginController {
                         @RequestParam("pwd") String pwd){
           System.out.println("mail:"+mail+"   pwd:"+pwd);
           String password=userService.findByMail(mail).getPassword();
-          String id=userService.findByMail(mail).getId();
-          if(password.equals(pwd)) return id;
+          UserPojo userPojo=userService.findByMail(mail);
+          if(password.equals(pwd)) return JSONObject.toJSONString(userPojo);
           return "0";
     }
     @RequestMapping(value = "/register", produces = "application/json; charset=UTF-8",method = RequestMethod.POST)

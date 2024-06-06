@@ -18,7 +18,7 @@ public class UserService {
     }
     public void addUser(String mail,String pwd,String name){
         //Long num=userDao.selectCount(new QueryWrapper<>())+1;
-        userDao.insert(new UserPojo(null,mail,pwd,name,null,null));
+        userDao.insert(new UserPojo(null,mail,pwd,name,null,null,null));
     }
 
     public void updateUser(String mail, String pwd) {
@@ -26,6 +26,20 @@ public class UserService {
         userPojo.setPassword(pwd);
         QueryWrapper<UserPojo> wrapper=new QueryWrapper<>();
         wrapper.eq("mail",mail);
+        userDao.update(userPojo,wrapper);
+    }
+    public void updateAvatar(String id,String avatar){
+        UserPojo userPojo=new UserPojo();
+        userPojo.setAvatar(avatar);
+        QueryWrapper<UserPojo> wrapper=new QueryWrapper<>();
+        wrapper.eq("id",id);
+        userDao.update(userPojo,wrapper);
+    }
+    public void updateTarget(String id,String target){
+        UserPojo userPojo=new UserPojo();
+        userPojo.setTarget(target);
+        QueryWrapper<UserPojo> wrapper=new QueryWrapper<>();
+        wrapper.eq("id",id);
         userDao.update(userPojo,wrapper);
     }
 }

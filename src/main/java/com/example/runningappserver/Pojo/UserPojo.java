@@ -25,9 +25,13 @@ public class UserPojo {
     private  String avatar;
     @TableField("target")
     private String target;
+    @TableField("message")
+    private String message;
     public String getPassword() {return this.pwd;}
     public String getId() {return this.id;}
     public String getAvatar(){return this.avatar;}
     public String getTarget(){return  this.target;}
     public void setPassword(String pwd) {this.pwd=pwd;}
+    public void setAvatar(String avatar) {this.avatar=avatar;}
+    public void setTarget(String target){this.target=target;}
 }
