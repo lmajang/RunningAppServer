@@ -12,7 +12,7 @@ public class RunningAppServerApplication {
     public static void main(String[] args) {
 
         SpringApplication.run(RunningAppServerApplication.class, args);
-        //chatService.startChatService(9999);
+        chatService.startChatService(9999);
     }
 
 }

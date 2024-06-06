@@ -1,19 +1,28 @@
 package com.example.runningappserver.Service.chatServer;
 
+import com.example.runningappserver.Service.ChatService;
+import com.example.runningappserver.controller.ChatController;
+import com.example.runningappserver.tool.SpringUtil;
 import org.json.simple.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.springframework.context.ApplicationContext;
 
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.net.Proxy;
+import javax.annotation.PostConstruct;
 import java.net.Socket;
+
+
 
 
 public class listenServer implements Runnable{
     private userSocket userSocket;
 
+
     public listenServer(userSocket userSocket){
         this.userSocket = userSocket;
     }
+    private ApplicationContext context = SpringUtil.getApplicationContext();
+    private ChatService chatservice = context.getBean(ChatService.class);
 
     @Override
     public void run() {
@@ -24,14 +33,16 @@ public class listenServer implements Runnable{
                     System.out.println("chat信息：" + json);
                     String userId = (String) json.get("userId");
                     String targetUserId = (String) json.get("TargetUserId");
-
+                    String msg = (String)json.get("msg");
                     userSocket targetSocket = chatService.getConnectSocketId(targetUserId);
                     System.out.println(targetSocket);
                     if (targetSocket != null) {
                         sendServer sendMsg = new sendServer(targetSocket.getSocket(), json, targetSocket.getOos());
                         sendMsg.sendToSocket();
+                        chatservice.insertChat(Integer.parseInt(userSocket.getUserId()),Integer.parseInt(targetUserId),msg,1);
                     } else {
                         //对方没上线，处理
+                        chatservice.insertChat(Integer.parseInt(userSocket.getUserId()),Integer.parseInt(targetUserId),msg,0);
                         System.out.println("对方不在线");
                     }
                 }else if(json.get("type").equals("image")){

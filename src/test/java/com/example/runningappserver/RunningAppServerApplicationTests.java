@@ -1,7 +1,7 @@
 package com.example.runningappserver;
 
-import com.alibaba.fastjson2.JSON;
-import com.example.runningappserver.Pojo.UserPojo;
+import com.example.runningappserver.Service.ChatService;
+import com.example.runningappserver.Service.FriendListService;
 import com.example.runningappserver.Service.UserService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,10 +10,14 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest
 class RunningAppServerApplicationTests {
     @Autowired
+    FriendListService friendListService;
+    @Autowired
     UserService userService;
+    @Autowired
+    ChatService chatService;
     @Test
     void contextLoads() {
-        userService.addUser("123123","123","123");
+       System.out.println(chatService.findFriendChat(1,2));
     }
 
 }

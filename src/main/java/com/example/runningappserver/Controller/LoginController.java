@@ -1,4 +1,4 @@
-package com.example.runningappserver.Controller;
+package com.example.runningappserver.controller;
 
 import com.example.runningappserver.Pojo.UserPojo;
 import com.example.runningappserver.Service.UserService;

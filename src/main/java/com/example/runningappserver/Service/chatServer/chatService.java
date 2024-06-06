@@ -1,5 +1,8 @@
 package com.example.runningappserver.Service.chatServer;
+import com.example.runningappserver.Service.ChatService;
 import org.json.simple.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -11,6 +14,7 @@ import java.util.Map;
 
 
 public class chatService {
+
 
     private static Map<String,userSocket> socketMap= new HashMap<>();
 

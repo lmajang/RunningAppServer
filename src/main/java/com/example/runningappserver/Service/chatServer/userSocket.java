@@ -1,8 +1,12 @@
 package com.example.runningappserver.Service.chatServer;
 
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
+
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+
 
 public class userSocket {
     private String userId;
