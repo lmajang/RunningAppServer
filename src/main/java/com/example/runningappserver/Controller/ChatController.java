@@ -26,9 +26,9 @@ public class ChatController {
     }
 
     @RequestMapping(value = "/FindNoReceiveChat", produces = "application/json; charset=UTF-8",method = RequestMethod.POST)
-    public List<chatEntity> FindNoReceiveChat(HttpServletRequest req,
+    public List<chatSingleEntity> FindNoReceiveChat(HttpServletRequest req,
                                               @RequestBody HashMap<String, String> map) {
-        return chatservice.findNoReceiveChat(Integer.parseInt(map.get("userId")));
+        return chatservice.findNoReceiveChat(Integer.parseInt(map.get("userId")), Integer.parseInt(map.get("sendId")));
     }
 
     @RequestMapping(value = "/FindFriendChat", produces = "application/json; charset=UTF-8",method = RequestMethod.POST)

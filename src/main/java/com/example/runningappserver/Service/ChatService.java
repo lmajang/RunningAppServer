@@ -34,14 +34,14 @@ public class ChatService {
 
     }
 
-    public List<chatEntity> findNoReceiveChat(Integer userId){
+    public List<chatSingleEntity> findNoReceiveChat(Integer userId,Integer sendId){
         QueryWrapper<ChatPojo> wrapper = new QueryWrapper<>();
-        wrapper.eq("receiver_id", userId).eq("receive_status",0);
+        wrapper.eq("receiver_id", userId).eq("sender_id",sendId).eq("receive_status",0).orderBy(true,true,"timestamp");
         List<ChatPojo> list = chatDao.selectList(wrapper);
-        List<chatEntity> chatEntityList = new ArrayList<>();
+        List<chatSingleEntity> chatEntityList = new ArrayList<>();
         chatDao.update(new ChatPojo(null,null,null,null,null,1),wrapper.eq("receiver_id", userId));
         for(ChatPojo chat:list){
-            chatEntityList.add(new chatEntity(String.valueOf(chat.getReceiverId()),chat.getMessage(),chatEntity.RECEIVE));
+            chatEntityList.add(new chatSingleEntity(chat.getSenderId(),chat.getReceiverId(),chat.getMessage(),chat.getTimestamp()));
         }
         return chatEntityList;
     }
@@ -53,7 +53,7 @@ public class ChatService {
     public List<chatSingleEntity> findFriendChat(Integer senderId, Integer receiverId){
         QueryWrapper<ChatPojo> wrapper = new QueryWrapper<>();
         wrapper.eq("receiver_id",senderId).eq("sender_id",receiverId).or().
-                eq("sender_id",senderId).eq("receiver_id",receiverId);
+                eq("sender_id",senderId).eq("receiver_id",receiverId).orderBy(true,true,"timestamp");
         List<ChatPojo> list = chatDao.selectList(wrapper);
         List<chatSingleEntity> clist = new ArrayList<>();
         for (ChatPojo chatPojo: list){

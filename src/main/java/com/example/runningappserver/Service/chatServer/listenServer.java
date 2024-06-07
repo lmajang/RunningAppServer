@@ -39,7 +39,7 @@ public class listenServer implements Runnable{
                     if (targetSocket != null) {
                         sendServer sendMsg = new sendServer(targetSocket.getSocket(), json, targetSocket.getOos());
                         sendMsg.sendToSocket();
-                        chatservice.insertChat(Integer.parseInt(userSocket.getUserId()),Integer.parseInt(targetUserId),msg,1);
+//                        chatservice.insertChat(Integer.parseInt(userSocket.getUserId()),Integer.parseInt(targetUserId),msg,1);
                     } else {
                         //对方没上线，处理
                         chatservice.insertChat(Integer.parseInt(userSocket.getUserId()),Integer.parseInt(targetUserId),msg,0);
