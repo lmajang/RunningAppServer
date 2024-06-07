@@ -16,6 +16,11 @@ public class UserService {
         wrapper.eq("mail",mail);
         return userDao.selectOne(wrapper);
     }
+    public UserPojo findByName(String name){
+        QueryWrapper<UserPojo> wrapper=new QueryWrapper<>();
+        wrapper.eq("username",name);
+        return userDao.selectOne(wrapper);
+    }
     public void addUser(String mail,String pwd,String name){
         //Long num=userDao.selectCount(new QueryWrapper<>())+1;
         userDao.insert(new UserPojo(null,mail,pwd,name,null,null,null));

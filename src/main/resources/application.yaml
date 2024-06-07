@@ -9,7 +9,7 @@ spring:
 # 开发环境配置
 server:
   port: 8080         # 服务器的HTTP端口
-  address: 192.168.99.188    # 允许局域网访问
+  address: 172.22.81.151    # 允许局域网访问
   servlet:
     encoding:
       charset: UTF-8
