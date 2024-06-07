@@ -37,4 +37,12 @@ public class FriendListController {
         return friendListService.findAllFriend(Integer.parseInt(map.get("userId")));
     }
 
+    @RequestMapping(value = "/isFriend", produces = "application/json; charset=UTF-8",method = RequestMethod.POST)
+    public Integer isFriend(HttpServletRequest req,
+                                        @RequestParam("userId") String userId,
+                                        @RequestParam("friendId") String friendId){
+
+        return friendListService.isFriend(userId,friendId);
+    }
+
 }

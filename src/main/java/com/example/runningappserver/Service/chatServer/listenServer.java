@@ -73,6 +73,7 @@ public class listenServer implements Runnable{
         }finally {
             try {
                 userSocket.getSocket().close();
+                System.out.println(userSocket.getUserId()+"退出");
                 chatService.deleteConnectSocketId(userSocket.getUserId());
             } catch (Exception e) {
                 e.printStackTrace();

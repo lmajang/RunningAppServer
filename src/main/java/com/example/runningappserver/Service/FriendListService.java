@@ -40,6 +40,19 @@ public class FriendListService {
         return friendlist;
     }
 
+    public Integer isFriend(String userId,String friendId){
+        QueryWrapper<FriendListPojo> wrapper = new QueryWrapper<>();
+        wrapper.eq("friend_id",friendId).eq("user_id",userId).or()
+                .eq("friend_id",userId).eq("user_id",friendId);
+        FriendListPojo friendListPojo = friendListDao.selectOne(wrapper);
+        if (friendListPojo == null){
+            return 0;
+        }else {
+            return 1;
+        }
+
+    }
+
     public List<friendEntity> findAllFriend(Integer userId){
         QueryWrapper<FriendListPojo> wrapperFriend = new QueryWrapper<>();
         QueryWrapper<UserPojo> wrapperUser = new QueryWrapper<>();
@@ -66,5 +79,6 @@ public class FriendListService {
     public int insertFriend(Integer userId,Integer friendId){
         return friendListDao.insert(new FriendListPojo(null,userId,friendId,null,null));
     }
+
 
 }

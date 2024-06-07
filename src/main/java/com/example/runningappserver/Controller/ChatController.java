@@ -4,6 +4,7 @@ package com.example.runningappserver.controller;
 import com.example.runningappserver.Pojo.ChatPojo;
 import com.example.runningappserver.Pojo.UserPojo;
 import com.example.runningappserver.Service.ChatService;
+import com.example.runningappserver.Service.chatServer.utilSocket;
 import com.example.runningappserver.entily.chatEntity;
 import com.example.runningappserver.entily.chatSingleEntity;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,4 +41,12 @@ public class ChatController {
         return chatservice.findFriendChat(Integer.parseInt(map.get("sender_id")),Integer.parseInt(map.get("receiver_id")));
     }
 
+    @RequestMapping(value = "/closeMySocket", produces = "application/json; charset=UTF-8",method = RequestMethod.POST)
+    public Integer closeMySocket(HttpServletRequest req,
+                                                @RequestBody HashMap<String, String> map){
+
+        String userId = map.get("userId");
+        utilSocket.closeConnectSocket(userId);
+        return 1;
+    }
 }

@@ -47,4 +47,5 @@ public class UserService {
         wrapper.eq("id",id);
         userDao.update(userPojo,wrapper);
     }
+
 }
