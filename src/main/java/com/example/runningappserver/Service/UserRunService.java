@@ -13,24 +13,24 @@ public class UserRunService {
     UserRunDao userRunDao;
     public UserRunPojo find(String id,String date){
         QueryWrapper<UserRunPojo> wrapper=new QueryWrapper<>();
-        wrapper.eq("id",id);
+        wrapper.eq("userid",id);
         wrapper.eq("date",date);
         UserRunPojo userRunPojo=new UserRunPojo();
         userRunPojo.setRun("0");
         if(userRunDao.selectCount(wrapper)==0) return userRunPojo;
         return userRunDao.selectOne(wrapper);
     }
-    public void updateRun(String id,String date,String run){
+    public Integer updateRun(String id,String date,String run){
         QueryWrapper<UserRunPojo> wrapper=new QueryWrapper<>();
         wrapper.eq("userid",id);
         wrapper.eq("date",date);
-        if(userRunDao.selectCount(wrapper)==0) userRunDao.insert(new UserRunPojo(null,id,date,run));
+        if(userRunDao.selectCount(wrapper)==0) return userRunDao.insert(new UserRunPojo(null,id,date,run));
         else {
             UserRunPojo userPojo = userRunDao.selectOne(wrapper);
             String run0 = userPojo.getRun();
             String res=String.valueOf(Double.parseDouble(run)+Double.parseDouble(run0));
             userPojo.setRun(res);
-            userRunDao.update(userPojo,wrapper);
+            return userRunDao.update(userPojo,wrapper);
         }
     }
 }

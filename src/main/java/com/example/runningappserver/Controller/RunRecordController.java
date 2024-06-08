@@ -3,6 +3,7 @@ package com.example.runningappserver.controller;
 import com.example.runningappserver.Pojo.RunRecordPojo;
 import com.example.runningappserver.Service.CalendarRecordService;
 import com.example.runningappserver.Service.RunRecordService;
+import com.example.runningappserver.Service.UserRunService;
 import com.example.runningappserver.entily.friendEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -16,6 +17,9 @@ import java.util.List;
 public class RunRecordController {
     @Autowired
     RunRecordService runRecordService;
+
+    @Autowired
+    UserRunService userRunService;
 
     @RequestMapping(value = "/uploadRunRecord", produces = "application/json; charset=UTF-8",method = RequestMethod.POST)
     public Integer uploadRunRecord(HttpServletRequest req,
@@ -41,5 +45,11 @@ public class RunRecordController {
         List<RunRecordPojo> result = runRecordService.findAllRunRecords(map.get("userId"));
         if(result.isEmpty()) return null;
         return result;
+    }
+
+    @RequestMapping(value = "/uploadTodayRecord", produces = "application/json; charset=UTF-8",method = RequestMethod.POST)
+    public Integer uploadTodayRecord(HttpServletRequest req,
+                                             @RequestBody HashMap<String, String> map){
+        return userRunService.updateRun(map.get("userId"),map.get("date"),map.get("run"));
     }
 }
