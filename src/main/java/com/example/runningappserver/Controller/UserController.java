@@ -56,4 +56,10 @@ public class UserController {
         friendNoticeService.insertFriendNotice(Integer.parseInt(senderid),Integer.parseInt(receiverid));
         return true;
     }
+    @RequestMapping(value = "/user6", produces = "application/json; charset=UTF-8",method = RequestMethod.POST)
+    public String user6(HttpServletRequest req,
+                        @RequestParam("id") String id){
+        System.out.println("id:"+id);
+        return userService.findById(id).getAvatar();
+    }
 }
