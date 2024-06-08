@@ -1,4 +1,4 @@
-package com.example.runningappserver.Controller;
+package com.example.runningappserver.controller;
 
 import com.alibaba.fastjson2.JSON;
 import com.example.runningappserver.Service.FriendNoticeService;
