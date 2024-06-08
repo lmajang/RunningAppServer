@@ -1,6 +1,8 @@
 package com.example.runningappserver.Pojo;
 
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -11,7 +13,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @TableName(value="user_run")
 public class UserRunPojo {
-    @TableField("id")
+    @TableId(value = "ID",type = IdType.AUTO)
+    private String mainid;
+    @TableField("userid")
     private String id;
     @TableField("date")
     private String date;

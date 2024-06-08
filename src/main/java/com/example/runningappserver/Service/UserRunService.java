@@ -2,6 +2,7 @@ package com.example.runningappserver.Service;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.example.runningappserver.Dao.UserRunDao;
+import com.example.runningappserver.Pojo.UserPojo;
 import com.example.runningappserver.Pojo.UserRunPojo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,5 +19,18 @@ public class UserRunService {
         userRunPojo.setRun("0");
         if(userRunDao.selectCount(wrapper)==0) return userRunPojo;
         return userRunDao.selectOne(wrapper);
+    }
+    public void updateRun(String id,String date,String run){
+        QueryWrapper<UserRunPojo> wrapper=new QueryWrapper<>();
+        wrapper.eq("userid",id);
+        wrapper.eq("date",date);
+        if(userRunDao.selectCount(wrapper)==0) userRunDao.insert(new UserRunPojo(null,id,date,run));
+        else {
+            UserRunPojo userPojo = userRunDao.selectOne(wrapper);
+            String run0 = userPojo.getRun();
+            String res=String.valueOf(Double.parseDouble(run)+Double.parseDouble(run0));
+            userPojo.setRun(res);
+            userRunDao.update(userPojo,wrapper);
+        }
     }
 }

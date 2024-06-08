@@ -1,7 +1,9 @@
 package com.example.runningappserver;
 
+import com.example.runningappserver.Pojo.UserRunPojo;
 import com.example.runningappserver.Service.ChatService;
 import com.example.runningappserver.Service.FriendListService;
+import com.example.runningappserver.Service.UserRunService;
 import com.example.runningappserver.Service.UserService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,9 +17,11 @@ class RunningAppServerApplicationTests {
     UserService userService;
     @Autowired
     ChatService chatService;
+    @Autowired
+    UserRunService userRunService;
     @Test
     void contextLoads() {
-       System.out.println(chatService.findFriendChat(1,2));
+       userRunService.updateRun("2","2024/6/8","2");
     }
 
 }
