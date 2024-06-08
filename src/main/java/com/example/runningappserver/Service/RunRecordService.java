@@ -18,7 +18,7 @@ public class RunRecordService {
 
     public List<RunRecordPojo> findAllRunRecords(String userId){
         QueryWrapper<RunRecordPojo> wrapper = new QueryWrapper<>();
-        wrapper.eq("runner_id",userId).orderBy(true,true,"upload_time");
+        wrapper.eq("runner_id",userId).orderBy(true,false,"upload_time");
         System.out.println(runRecordDao.selectList(wrapper));
         return runRecordDao.selectList(wrapper);
     }
