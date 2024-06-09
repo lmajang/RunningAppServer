@@ -22,7 +22,7 @@ class RunningAppServerApplicationTests {
 
     @Test
     void contextLoads() {
-       System.out.println(runRecordService.findAllRunRecords("2"));
+       System.out.println(friendListService.findAllFriend(8));
     }
 
 }

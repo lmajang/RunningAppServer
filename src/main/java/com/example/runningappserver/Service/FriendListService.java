@@ -59,6 +59,7 @@ public class FriendListService {
         wrapperFriend.or(i -> i.eq("user_id",userId).select("friend_id"))
                 .or(i->i.eq("friend_id",userId).select("user_id"));
         List<FriendListPojo> friendList = friendListDao.selectList(wrapperFriend);
+        if (friendList.isEmpty()) return null;
         // 提取查询结果中的另一半ID
         List<Integer> otherHalfIds = new ArrayList<>();
         for (FriendListPojo result : friendList) {
